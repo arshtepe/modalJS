@@ -216,7 +216,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/2/
 <script src="path_to_folder/modal.version.min.js"></script>
 ```
 
-### Пример отображения окна с обработкой оканчания анимации
+### Пример отображения окна с обработкой окончания анимации
 
 http://jsfiddle.net/CyBer_UA/HSV4E/1/
 ```javascript
