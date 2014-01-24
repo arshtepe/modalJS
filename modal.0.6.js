@@ -66,7 +66,7 @@
     this.setStartAnimationPosition();
     this._showAnimateWin();
 
-     this.onopen && this.onopened();
+     this.onopened && this.onopened();
 
     return this.isOpen = true;
  };
