@@ -58,7 +58,7 @@
 
     var win = this.window;
 
-    this._overlay.style.display = "block";
+    this.overlay.style.display = "block";
 
     win.style.display = "block";
     this.setStartAnimationPosition();
@@ -75,7 +75,7 @@
  modal.prototype.Close = function() {
     if(!this.isOpen) return;
 
-     this._overlay.style.display = "";
+     this.overlay.style.display = "";
 
      this.window.style.display = "none";
      removeClass(this.window, "modal-window-animate");
@@ -119,7 +119,7 @@
 
          modal.Close();
      }, false);
-     modal._overlay = document.body.appendChild(overlay);
+     modal.overlay = document.body.appendChild(overlay);
  }
 
  function addClass(elem, cls) {
