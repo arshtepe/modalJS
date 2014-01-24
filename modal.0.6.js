@@ -1,7 +1,12 @@
-//chrome +
-//firefox +
-//opera +
-// ie9+ (для поддержки ие 8, подключить перед скриптом скрипт "ie8.support.js")
+/* Artem Shtepenko https://github.com/cyberua/modalJS */
+
+/*
+support:
+chrome +
+firefox +
+opera +
+ ie9+ (для поддержки ие 8, подключить перед скриптом скрипт "ie8.support.js")
+*/
 (function() {
     "use strict";
  /**
