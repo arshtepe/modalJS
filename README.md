@@ -9,6 +9,24 @@
  * Поддержка css3 анимации(если браузер поддерживает)
  * Удобная настройка анимации
 
+## Browsers Support
+ * Chrome +
+ * Firefox + 
+ * Opera +
+ * Internet Explorer 9 + (for support ie 8, need include "ie8.support.min.js")
+
+####Include example
+``` HTML
+<!--[if IE 8]>
+<style>
+ .modal-overlay {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  }
+</style>
+<script src="ie8.support.min.js"> </script>
+<![endif]-->
+```
+
 ##Demo
 
 ###Базовое демо 
@@ -101,3 +119,10 @@ modal.onopened = function () {
 
 ```
 
+## Author
+
+Artem Shtepenko @cyberua
+
+## License
+
+modalJS is licensed under the MIT License (see LICENSE for details).
