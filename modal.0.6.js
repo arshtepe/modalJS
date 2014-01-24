@@ -86,17 +86,16 @@
 
 
  modal.prototype._showAnimateWin = function () {
-     var win = this.window;
+     var win = this.window,
+         win_size = win.getBoundingClientRect(),
+         top = (window.innerHeight - win_size.height) / 2,
+         left = (window.innerWidth - win_size.width) / 2;
 
      if(!this.params.NoUseAnimate){
          addClass(win, "modal-window-animate");
      }
 
      setTimeout(function () {
-         var win_size = win.getBoundingClientRect(),
-             top = (window.innerHeight - win_size.height) / 2,
-             left = (window.innerWidth - win_size.width) / 2;
-
          win.style.top = top + "px";
          win.style.left = left + "px";
      }, 0)
