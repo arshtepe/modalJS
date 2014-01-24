@@ -56,6 +56,8 @@
  modal.prototype.Show = function()  {
     if(this.isOpen) return;
 
+    this.onopen && this.onopen();
+
     var win = this.window;
 
     this.overlay.style.display = "block";
@@ -63,6 +65,8 @@
     win.style.display = "block";
     this.setStartAnimationPosition();
     this._showAnimateWin();
+
+     this.onopen && this.onopened();
 
     return this.isOpen = true;
  };
@@ -75,11 +79,15 @@
  modal.prototype.Close = function() {
     if(!this.isOpen) return;
 
+     this.onclose && this.onclose();
+
      this.overlay.style.display = "";
 
      this.window.style.display = "none";
      removeClass(this.window, "modal-window-animate");
      this.isOpen = false;
+
+     this.onclosed && this.onclosed();
 
      return true;
  };
@@ -98,7 +106,7 @@
      setTimeout(function () {
          win.style.top = top + "px";
          win.style.left = left + "px";
-     }, 0)
+     }, 0);
  };
 
  function isHTMLElement(elem) {
