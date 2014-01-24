@@ -29,6 +29,11 @@
      }, false);
  };
 
+ modal.prototype.setStartAnimationPosition = function() {
+     this.window.style.top = -this.window.clientHeight + "px";
+ }
+
+
  /**
  * @param {Element} window - ссылка на модальное окно
  *
@@ -38,7 +43,7 @@
      if(!isHTMLElement(window))
         throw "It is incorrect parameter 'window', expected HTMLElement";
 
-     this._window = window;
+     this.window = window;
      window.style.position = 'fixed';
      window.style.zIndex = '100000';
  };
@@ -51,12 +56,12 @@
  modal.prototype.Show = function()  {
     if(this.isOpen) return;
 
-    var win = this._window;
+    var win = this.window;
 
     this._overlay.style.display = "block";
 
     win.style.display = "block";
-    win.style.top = - win.clientHeight + "px";
+    this.setStartAnimationPosition();
     this._showAnimateWin();
 
     return this.isOpen = true;
@@ -72,8 +77,8 @@
 
      this._overlay.style.display = "";
 
-     this._window.style.display = "none";
-     removeClass(this._window, "modal-window-animate");
+     this.window.style.display = "none";
+     removeClass(this.window, "modal-window-animate");
      this.isOpen = false;
 
      return true;
@@ -81,7 +86,7 @@
 
 
  modal.prototype._showAnimateWin = function () {
-     var win = this._window;
+     var win = this.window;
 
      if(!this.params.NoUseAnimate){
          addClass(win, "modal-window-animate");
