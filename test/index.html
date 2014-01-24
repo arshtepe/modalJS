@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+  <link type='text/css' rel='stylesheet' href='css/modal-default.css'>
+  <link type='text/css' rel='stylesheet' href='css/modalStyle.css'>
+  <!--[if IE 8]>
+      <style>
+          .modal-overlay {
+              filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+          }
+      </style>
+      <script src="js/ie8.support.js"> </script>
+      <![endif]-->
+  <script src='js/modal.0.5.js'> </script>
+  </head>
+  <body>
+
+
+    <div id="modal-window" >
+  <div id='modal-head'><h2>Ошибка</h2></div>
+  <div id='modal-body'>Авторизация не удалась!</div>
+  <div id='modal-footer'>
+   <span class='modal-button'>Повторить</span>
+  </div>
+
+</div>
+    
+    <script>
+
+var modal = new ModalJS({
+	window: document.getElementById('modal-window')
+});
+
+modal.onOpen = function() {
+//    return false;
+}
+modal.onClose = function () {
+//   return false;
+};
+
+modal.Show();
+
+
+    </script>
+
+  </body>
+</html>
