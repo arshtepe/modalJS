@@ -36,6 +36,10 @@ http://jsfiddle.net/CyBer_UA/8evMH/2/
 
 ##modalJS API Documentation
 
+##Параметры
+ * window - ссылка на элемент модального окна
+ * NotUseAnimate (Не обязательный) - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
+
 ###Методы
 
 ####Show ()
