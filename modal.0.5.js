@@ -1,5 +1,7 @@
-//chrmoe+, firefox 3+
-// ie9+ , должен и в ie6 (ie6 не тестировался)
+//chrome +
+//firefox +
+//opera +
+// ie9+ (для поддержки ие 8, подключить перед скриптом скрипт "ie8.support.js")
 (function() {
     "use strict";
  /**
