@@ -9,6 +9,8 @@ opera +
 */
 (function() {
     "use strict";
+
+ var cls = "modal-window-animate";
  /**
  * Создаем объект управления модальным окном
  *
@@ -16,7 +18,7 @@ opera +
  * @param {HTMLElement} window - ссылка на элемент модального окна
  * @param {bool} NotUseAnimate - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
  */
- function modal(params) {
+  function modal(params) {
      var self = this, id;
 
      this.params = params;
@@ -24,117 +26,130 @@ opera +
 
      addOverlay(this);
 
-     window.addEventListener("resize", function () {
+     this._resizeHandler = function (){
          if(!self.isOpen) return;
          id && clearTimeout(id);
 
          id = setTimeout(function () {
-             self._showAnimateWin();
+            showAnimateWin(self);
          }, 10);
-     }, false);
- };
+     };
 
- modal.prototype.setStartAnimationPosition = function() {
+     window.addEventListener("resize", this._resizeHandler, false);
+  };
+
+  modal.prototype.setAnimationPosition = function() {
      this.window.style.top = -this.window.clientHeight + "px";
- }
-
+  }
 
  /**
  * @param {Element} window - ссылка на модальное окно
  *
  */
 
- modal.prototype.setWindow = function (window) {
+  modal.prototype.setWindow = function (window) {
      if(!isHTMLElement(window))
-        throw "It is incorrect parameter 'window', expected HTMLElement";
+       throw "Incorrect parameter 'window', expected Element";
 
      this.window = window;
      window.style.position = 'fixed';
      window.style.zIndex = '100000';
- };
+  };
 
  /**
  * @return {Bool} возвращает true если вызов был успешный, иначе undefined
  *
  */
 
- modal.prototype.Show = function()  {
+  modal.prototype.show = function()  {
     if(this.isOpen) return;
 
     this.onopen && this.onopen();
 
-    var win = this.window;
-
     this.overlay.style.display = "block";
+    this.window.style.display = "block";
+    this.setAnimationPosition();
+    showAnimateWin(this);
 
-    win.style.display = "block";
-    this.setStartAnimationPosition();
-    this._showAnimateWin();
-
-     this.onopened && this.onopened();
+    this.onopened && this.onopened();
 
     return this.isOpen = true;
- };
+  };
 
  /**
  * @return {Bool} возвращает true если вызов был успешный, иначе undefined
  *
  */
 
- modal.prototype.Close = function() {
+  modal.prototype.hide = function() {
     if(!this.isOpen) return;
 
      this.onclose && this.onclose();
-
      this.overlay.style.display = "";
-
      this.window.style.display = "none";
-     removeClass(this.window, "modal-window-animate");
+     removeClass(this.window, cls);
      this.isOpen = false;
 
      this.onclosed && this.onclosed();
-
      return true;
- };
+  };
+
+ /**
+  * @param {Bool} -  if true, will remove modal window
+  *
+  * */
+
+  modal.prototype.destroy = function(removeWindow) {
+    this.hide();
+    window.removeEventListener("resize", this._resizeHandler);
+    this.overlay.removeEventListener("click", this._closeHandler);
+    this.overlay = remove(this.overlay);
+
+    if(removeWindow)
+        this.window = remove(this.window);
+
+    function remove(elem) {
+        elem.parentNode.removeChild(elem);
+    };
+  };
+
+  function showAnimateWin(modal) {
+    var win = modal.window,
+        top = (window.innerHeight - win.offsetHeight) / 2,
+        left = (window.innerWidth - win.offsetWidth) / 2;
+
+    if(!modal.params.NoUseAnimate){
+        addClass(win, cls);
+    }
+
+    setTimeout(function () {
+        win.style.top = top + "px";
+        win.style.left = left + "px";
+    }, 0);
+  };
+
+  function isHTMLElement(elem) {
+    return (typeof elem==="object") &&
+        (elem.nodeType===1) && (typeof elem.style === "object") &&
+        (typeof elem.ownerDocument ==="object");
+  }
 
 
- modal.prototype._showAnimateWin = function () {
-     var win = this.window,
-         win_size = win.getBoundingClientRect(),
-         top = (window.innerHeight - win_size.height) / 2,
-         left = (window.innerWidth - win_size.width) / 2;
-
-     if(!this.params.NoUseAnimate){
-         addClass(win, "modal-window-animate");
-     }
-
-     setTimeout(function () {
-         win.style.top = top + "px";
-         win.style.left = left + "px";
-     }, 0);
- };
-
- function isHTMLElement(elem) {
-     return (typeof elem==="object") &&
-         (elem.nodeType===1) && (typeof elem.style === "object") &&
-         (typeof elem.ownerDocument ==="object");
- }
-
-
- function addOverlay(modal) {
+  function addOverlay(modal) {
      var overlay = document.createElement("div");
-     overlay.className = "modal-overlay";
-     overlay.addEventListener("click", function () {
 
-         if(!modal.onClose || modal.onClose.call(modal) !== false)
+     overlay.className = "modal-overlay";
+     modal._closeHandler = function() {
+        if(!modal.onclose || modal.onclose.call(modal) !== false)
              return;
 
-         modal.Close();
-     }, false);
+         modal.hide();
+     };
+     overlay.addEventListener("click", modal._closeHandler, false);
      modal.overlay = document.body.appendChild(overlay);
- }
+  }
 
- function addClass(elem, cls) {
+  function addClass(elem, cls) {
     var classes = elem.className.split(" ");
 
     for(var i = classes.length; i; i--) {
@@ -143,10 +158,9 @@ opera +
 
     classes.push(cls);
     elem.className = classes.join(" ");
- };
+  };
 
- function removeClass(el, cls) {
-
+  function removeClass(el, cls) {
     var c = el.className.split(' ');
 
     for (var i=0; i<c.length; i++) {
@@ -155,9 +169,7 @@ opera +
 
     el.className = c.join(' ');
 
- };
-
-
+  };
 
  window.ModalJS = modal;
 

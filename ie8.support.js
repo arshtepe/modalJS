@@ -7,24 +7,6 @@
         get: function () { return html.clientHeight }
     });
 
-   var rect =  Element.prototype.getBoundingClientRect;
-
-   Element.prototype.getBoundingClientRect = function () {
-   	var res = rect.apply(this, arguments),
-   		_return = {};
-
-    for(var key in res) {
-    	_return[key] = res[key];
-    };
-
-   	_return.height = this.clientHeight;
-   	_return.width = this.clientWidth;
-
-   	return _return;
-   }
-
-
-
    // added addEventListener support
   function stopPropagation() {
     this.cancelBubble = true;
