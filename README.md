@@ -133,7 +133,7 @@ modal.onopened = function () {
 }
 
 ```
-Need change <br>transition</b> in modal-default.css, from left on required value
+Need change <b>transition</b> in modal-default.css, from left on required value
 ```CSS 
     transition: .7s ease-in;
    -o-transition: .7s ease-in;
