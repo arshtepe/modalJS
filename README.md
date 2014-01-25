@@ -1,5 +1,5 @@
 #modalJS - English Documentation
-It is small cross-browser script for modal/popup windows
+It is small cross-browser script for modal/popup windows. Demo http://jsfiddle.net/CyBer_UA/pee3V/6/
 
 ##Features
  * Cross browser compatibility
@@ -29,9 +29,9 @@ It is small cross-browser script for modal/popup windows
 ##Demo
 
 ### Example
-http://jsfiddle.net/CyBer_UA/pee3V/2/
+http://jsfiddle.net/CyBer_UA/pee3V/6/
 ####Example of how to set up the animation
-http://jsfiddle.net/CyBer_UA/8evMH/2/
+http://jsfiddle.net/CyBer_UA/8evMH/5/
 
 ##modalJS API Documentation
 
@@ -39,10 +39,23 @@ http://jsfiddle.net/CyBer_UA/8evMH/2/
  * <b>window</b> - link on window {Element};
  * <b>NotUseAnimate</b> (optional) -  If need switch off animation set true.
 
+```javascript
+
+var modal = new ModalJS({
+    window: document.getElementById('modal-window'),
+    NotUseAnimate: true
+});
+```
+
 ###Methods
 
-####Show  (without parameters)
-####Close (without parameters)
+####show  ()
+without parameters
+####close ()
+without parameters
+####destroy(removeWindow)
+Removes event handlers and remove overlay from dom, also clears variables.
+If parameter "removeWindow" removes modal window from dom.
 ####setWindow(window) 
   Sets active window for show.
   
@@ -57,7 +70,7 @@ After opening window, but ignores css3 animation. <a href="#editing-css3-animati
 After closing window, but ignores css3 animation. <a href="#editing-css3-animation">Example how handle transitionend </a>
 
 ###Function handler
-####setStartAnimationPosition
+####setAnimationPosition
 Sets start position for window.
 
 ## How to Use
@@ -75,7 +88,7 @@ For support IE 8
 
 ### Example handling transitionend
 
-http://jsfiddle.net/CyBer_UA/HSV4E/1/
+http://jsfiddle.net/CyBer_UA/9Djr5/1/
 ```javascript
 var modal = new ModalJS({
     window: document.getElementById('modal-window'),
@@ -87,7 +100,7 @@ modal.onopen = function () {
   });
 };
 
-modal.Show()// show window
+modal.show()// show window
 
 function transitionend(elem, callback) {
     elem.addEventListener("transitionend", onEnd);
@@ -105,11 +118,11 @@ function transitionend(elem, callback) {
 
 ### Editing css3 animation
 
-http://jsfiddle.net/CyBer_UA/NyYZE/1/
+http://jsfiddle.net/CyBer_UA/qyG9K/1/
 ```javascript
 //....
 
-modal.setStartAnimationPosition = function () {
+modal.setAnimationPosition = function () {
   var body = document.body;
   this.window.style.opacity = 0;
   this.window.style.top = body.clientHeight + this.window.clientHeight + "px"; // move from bottom
@@ -139,7 +152,7 @@ modalJS is licensed under the MIT License (see LICENSE for details).
 
 #modalJS - Russian Documentation
 
-Маленький кроссбраузерный скрипт для всплывающих/модальных окон, без использования дополнительных библиотек. Demo http://jsfiddle.net/CyBer_UA/pee3V/2/
+Маленький кроссбраузерный скрипт для всплывающих/модальных окон, без использования дополнительных библиотек. Demo http://jsfiddle.net/CyBer_UA/pee3V/6/
 ##Features
 
  * Кроссбраузерность
@@ -169,9 +182,9 @@ modalJS is licensed under the MIT License (see LICENSE for details).
 ##Demo
 
 ###Базовое демо 
-http://jsfiddle.net/CyBer_UA/pee3V/2/
+http://jsfiddle.net/CyBer_UA/pee3V/6/
 ####Демо с изменением анимации 
-http://jsfiddle.net/CyBer_UA/8evMH/2/
+http://jsfiddle.net/CyBer_UA/8evMH/5/
 
 ##modalJS API Documentation
 
@@ -179,12 +192,23 @@ http://jsfiddle.net/CyBer_UA/8evMH/2/
  * <b>window</b> - ссылка на элемент модального окна
  * <b>NotUseAnimate</b> (Не обязательный) - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
 
+```javascript
+
+var modal = new ModalJS({
+    window: document.getElementById('modal-window'),
+    NotUseAnimate: true
+});
+```
+
 ###Методы
 
-####Show ()
+####show ()
   Отображает установленное окно (не принимает параметров)
-####Close ()
-  Скрывает установленное окно (не принимает параметров)<br>
+####close ()
+  Скрывает установленное окно (не принимает параметров)
+####destroy(removeWindow)
+Удаляет обработчики событий также удаляет overaly из DOM.
+Если параметр "removeWindow" true, то окно (свойство window) удаляеться из DOM.
 ####setWindow(window) 
   Устанавлиает активное окно, принимает в качества параметра Element, если переданный обьект не являеться Element обьектом будет вызвано исключение с к текстом "It is incorrect parameter 'window', expected HTMLElement"
 
@@ -200,7 +224,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/2/
 
 
 ###Функция обработчик
-####setStartAnimationPosition
+####setAnimationPosition
 Если нужно изменить начальное положение положение окна перед отображением, необходимо переопределить эту функцию.
 
 ## How to Use
@@ -218,7 +242,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/2/
 
 ### Пример отображения окна с обработкой окончания анимации
 
-http://jsfiddle.net/CyBer_UA/HSV4E/1/
+http://jsfiddle.net/CyBer_UA/9Djr5/1/
 ```javascript
 var modal = new ModalJS({
     window: document.getElementById('modal-window'),
@@ -230,7 +254,7 @@ modal.onopen = function () {
   });
 };
 
-modal.Show()// show window
+modal.show()// show window
 
 function transitionend(elem, callback) {
     elem.addEventListener("transitionend", onEnd);
@@ -248,11 +272,11 @@ function transitionend(elem, callback) {
 
 ### Управление анимацией отображения
 
-http://jsfiddle.net/CyBer_UA/NyYZE/1/
+http://jsfiddle.net/CyBer_UA/qyG9K/1/
 ```javascript
 //....
 
-modal.setStartAnimationPosition = function () {
+modal.setAnimationPosition = function () {
   var body = document.body;
   this.window.style.opacity = 0;
   this.window.style.top = body.clientHeight + this.window.clientHeight + "px"; // move from bottom
