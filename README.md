@@ -1,3 +1,8 @@
+Wiki
+====
+<a href="https://github.com/cyberua/modalJS/wiki/modalJs---English-Documentation">English documentation</a><br>
+<a href="https://github.com/cyberua/modalJS/wiki/modalJS---%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F">Русская документация</a>
+
 #modalJS - English Documentation
 It is small cross-browser script for modal/popup windows. Demo http://jsfiddle.net/CyBer_UA/pee3V/6/
 
