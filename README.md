@@ -41,7 +41,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/5/
 ##modalJS API Documentation
 
 ##Parameters
- * <b>window</b> (optional) - link on window {Element}, need set window before call <b>show</b>, otherwise else will be error;
+ * <b>window</b> (optional) - link on window {Element}, need set window before call <b>show</b>, otherwise will be error;
  * <b>NotUseAnimate</b> (optional) -  If need switch off animation set true.
 
 ```javascript
