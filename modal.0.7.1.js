@@ -21,8 +21,8 @@ opera +
   function modal(params) {
      var self = this, id;
 
-     this.params = params;
-     this.setWindow(params.window);
+     this.params = params = params || {};
+     params.window && this.setWindow(params.window);
 
      addOverlay(this);
 
@@ -54,6 +54,8 @@ opera +
      this.window = window;
      window.style.position = 'fixed';
      window.style.zIndex = '100000';
+
+     return this;
   };
 
  /**
@@ -105,7 +107,7 @@ opera +
     this.overlay.removeEventListener("click", this._closeHandler);
     this.overlay = remove(this.overlay);
 
-    if(removeWindow)
+    if(removeWindow && this.window)
         this.window = remove(this.window);
 
     function remove(elem) {
