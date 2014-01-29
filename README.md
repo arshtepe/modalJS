@@ -41,7 +41,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/5/
 ##modalJS API Documentation
 
 ##Parameters
- * <b>window</b> - link on window {Element};
+ * <b>window</b> (optional) - link on window {Element}, need set window before call <b>show</b>, otherwise else will be error;
  * <b>NotUseAnimate</b> (optional) -  If need switch off animation set true.
 
 ```javascript
@@ -194,7 +194,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/5/
 ##modalJS API Documentation
 
 ##Параметры
- * <b>window</b> - ссылка на элемент модального окна
+ * <b>window</b> - ссылка на элемент модального окна, если не передать ссылку на окно в конструктор его неходимо установить перед вызовом show, иначе будет ошибка.
  * <b>NotUseAnimate</b> (Не обязательный) - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
 
 ```javascript
