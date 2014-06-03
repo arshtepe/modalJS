@@ -4,7 +4,7 @@ Wiki
 <a href="https://github.com/cyberua/modalJS/wiki/modalJS---%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B0%D1%8F-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F">Русская документация</a>
 
 #modalJS - English Documentation
-It is small cross-browser script for modal/popup windows. Demo http://jsfiddle.net/CyBer_UA/pee3V/6/
+It is small cross-browser script for modal/popup windows. Demo http://jsfiddle.net/8evMH/7/
 
 ##Features
  * Cross browser compatibility
@@ -34,9 +34,9 @@ It is small cross-browser script for modal/popup windows. Demo http://jsfiddle.n
 ##Demo
 
 ### Example
-http://jsfiddle.net/CyBer_UA/pee3V/6/
+http://jsfiddle.net/pee3V/10/
 ####Example of how to set up the animation
-http://jsfiddle.net/CyBer_UA/8evMH/5/
+http://jsfiddle.net/8evMH/8/
 
 ##modalJS API Documentation
 
@@ -96,7 +96,7 @@ For support IE 8
 
 ### Example handling transitionend
 
-http://jsfiddle.net/CyBer_UA/9Djr5/1/
+http://jsfiddle.net/9Djr5/2/
 ```javascript
 var modal = new ModalJS({
     window: document.getElementById('modal-window'),
@@ -126,7 +126,7 @@ function transitionend(elem, callback) {
 
 ### Editing css3 animation
 
-http://jsfiddle.net/CyBer_UA/qyG9K/1/
+http://jsfiddle.net/qyG9K/2/
 ```javascript
 //....
 
@@ -160,7 +160,7 @@ modalJS is licensed under the MIT License (see LICENSE for details).
 
 #modalJS - Russian Documentation
 
-Маленький кроссбраузерный скрипт для всплывающих/модальных окон, без использования дополнительных библиотек. Demo http://jsfiddle.net/CyBer_UA/pee3V/6/
+Маленький кроссбраузерный скрипт для всплывающих/модальных окон, без использования дополнительных библиотек. http://jsfiddle.net/8evMH/7/
 ##Features
 
  * Кроссбраузерность
@@ -190,9 +190,9 @@ modalJS is licensed under the MIT License (see LICENSE for details).
 ##Demo
 
 ###Базовое демо 
-http://jsfiddle.net/CyBer_UA/pee3V/6/
+http://jsfiddle.net/pee3V/10/
 ####Демо с изменением анимации 
-http://jsfiddle.net/CyBer_UA/8evMH/5/
+http://jsfiddle.net/8evMH/8/
 
 ##modalJS API Documentation
 
@@ -252,7 +252,7 @@ var modal = new ModalJS({
 
 ### Пример отображения окна с обработкой окончания анимации
 
-http://jsfiddle.net/CyBer_UA/9Djr5/1/
+http://jsfiddle.net/9Djr5/2/
 ```javascript
 var modal = new ModalJS({
     window: document.getElementById('modal-window'),
@@ -282,7 +282,7 @@ function transitionend(elem, callback) {
 
 ### Управление анимацией отображения
 
-http://jsfiddle.net/CyBer_UA/qyG9K/1/
+http://jsfiddle.net/qyG9K/2/
 ```javascript
 //....
 
