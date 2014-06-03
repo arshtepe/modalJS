@@ -43,12 +43,15 @@ http://jsfiddle.net/CyBer_UA/8evMH/5/
 ##Parameters
  * <b>window</b> (optional) - link on window {Element}, need set window before call <b>show</b>, otherwise will be error;
  * <b>NotUseAnimate</b> (optional) -  If need switch off animation set true.
+ * <b>NotUseAnimate</b> (optional) - class name for close button
 
 ```javascript
 
 var modal = new ModalJS({
     window: document.getElementById('modal-window'),
-    NotUseAnimate: true
+    NotUseAnimate: true,
+    closeButtonCls: "class"
+    
 });
 ```
 
@@ -196,12 +199,14 @@ http://jsfiddle.net/CyBer_UA/8evMH/5/
 ##Параметры
  * <b>window</b> - ссылка на элемент модального окна, если не передать ссылку на окно в конструктор его неходимо установить перед вызовом show, иначе будет ошибка.
  * <b>NotUseAnimate</b> (Не обязательный) - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
+ * <b>closeButtonCls</b> (Не обязательный) - класс элемента при клике на который окно должно убератся 
 
 ```javascript
 
 var modal = new ModalJS({
     window: document.getElementById('modal-window'),
-    NotUseAnimate: true
+    NotUseAnimate: true,
+    closeButtonCls: "class"
 });
 ```
 
