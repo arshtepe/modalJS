@@ -14,20 +14,27 @@
   function preventDefault() {
     this.returnValue = false;
   };
-  function addEventUsingAttach(eventName, handler)
+  function addEvent( eventName, handler )
   {
     this.attachEvent("on" + eventName, function() {
       var e = window.event;
       e.stopPropagation = stopPropagation;
       e.preventDefault = preventDefault;
+      e.target = e.srcElement;
       handler.call(this, e);
     });
+  }
+
+  function removeEvent( eventName, handler )
+  {
+    this.detachEvent ( "on" + eventName, handler );
   }
 
   // Function to add `addEvent` to the given target object
   function extendIt(target)
   {
-  	target.addEventListener = addEventUsingAttach;
+  	target.addEventListener = addEvent;
+    target.removeEventListener = removeEvent;
   }
 
   // Add it to `Element.prototype` if we have it
@@ -38,4 +45,4 @@
 
 
    
-}(window, document.documentElement));
+}( window, document.documentElement ));

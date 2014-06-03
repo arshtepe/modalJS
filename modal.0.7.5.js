@@ -10,7 +10,8 @@ opera +
 (function() {
     "use strict";
 
- var cls = "modal-window-animate";
+ var cls = "modal-window-animate",
+     idAttr = "modal-window-id";
  /**
  * Создаем объект управления модальным окном
  *
@@ -18,11 +19,18 @@ opera +
  * @param {HTMLElement} window - ссылка на элемент модального окна
  * @param {bool} NotUseAnimate - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
  */
-  function modal(params) {
+  function modal( params ) {
+
      var self = this, id;
 
      this.params = params = params || {};
-     params.window && this.setWindow(params.window);
+     this._windowHandlers = { };
+
+     if ( params.window !== undefined ) {
+
+      this.setWindow( params.window );
+
+     }
 
      addOverlay(this);
 
@@ -32,10 +40,10 @@ opera +
 
          id = setTimeout(function () {
             showAnimateWin(self);
-         }, 10);
+         }, 10 );
      };
 
-     window.addEventListener("resize", this._resizeHandler, false);
+     window.addEventListener( "resize", this._resizeHandler, false );
   };
 
   modal.prototype.setAnimationPosition = function() {
@@ -47,16 +55,79 @@ opera +
  *
  */
 
-  modal.prototype.setWindow = function (window) {
-     if(!isHTMLElement(window))
+  modal.prototype.setWindow = function ( modalWindow ) {
+
+     if( !isHTMLElement( modalWindow ))
        throw "Incorrect parameter 'window', expected Element";
 
-     this.window = window;
-     window.style.position = 'fixed';
-     window.style.zIndex = '100000';
+     if ( this.params.closeButtonCls !== undefined ) {
+       closeHadnler ( this, modalWindow );
+     }
+     
+
+     this.window = modalWindow;
+     modalWindow.style.position = 'fixed';
+     modalWindow.style.zIndex = '100000';
+     
 
      return this;
   };
+
+ 
+
+  function closeHadnler ( ctx, newWindow ) {
+
+    var id = Math.random ().toString( ).slice(2),
+        handler, windowId;
+
+    newWindow.setAttribute ( idAttr , id );
+
+    if ( ctx.window !== undefined ) {
+
+      removeCloseHandler ( ctx );
+     }
+
+
+     handler = ctx._windowHandlers [ id ] = function( e ) {
+      onClickClose.call ( newWindow, e, ctx );
+     }; 
+
+
+     newWindow.addEventListener ( "click", handler );
+  };
+
+   function onClickClose ( e, ctx ) {
+
+    var parent = e.target,
+        cls = ctx.params.closeButtonCls;
+
+    if ( hasClass ( parent, cls ) )  {
+      ctx.hide ();
+      return;
+    }
+
+    while ( ( parent = parent.parentNode ) !== this ) {
+      
+      if( hasClass ( parent, cls ) ) {
+        ctx.hide ();
+        return;
+      }
+
+    }
+
+  };
+
+  function removeCloseHandler ( ctx ) {
+    
+    var windowId, handler;
+
+     windowId = ctx.window.getAttribute ( idAttr );
+     handler = ctx._windowHandlers [ windowId ];
+     ctx.window.removeEventListener ( "click", handler );
+     delete ctx._windowHandlers[ windowId ];
+
+  };
+
 
  /**
  * @return {Bool} возвращает true если вызов был успешный, иначе undefined
@@ -64,14 +135,15 @@ opera +
  */
 
   modal.prototype.show = function()  {
-    if(this.isOpen) return;
+    if( this.isOpen || 
+        !isHTMLElement ( this.window )) return;
 
     this.onopen && this.onopen();
 
     this.overlay.style.display = "block";
     this.window.style.display = "block";
     this.setAnimationPosition();
-    showAnimateWin(this);
+    showAnimateWin( this );
 
     this.onopened && this.onopened();
 
@@ -84,7 +156,9 @@ opera +
  */
 
   modal.prototype.hide = function() {
-    if(!this.isOpen) return;
+
+    if( !this.isOpen || 
+       !isHTMLElement ( this.window ) ) return;
 
      this.onclose && this.onclose();
      this.overlay.style.display = "";
@@ -101,14 +175,16 @@ opera +
   *
   * */
 
-  modal.prototype.destroy = function(removeWindow) {
+  modal.prototype.destroy = function( removeWindow ) {
+
     this.hide();
     window.removeEventListener("resize", this._resizeHandler);
     this.overlay.removeEventListener("click", this._closeHandler);
-    this.overlay = remove(this.overlay);
+    this.overlay = remove( this.overlay );
+    removeCloseHandler ( ctx );
 
-    if(removeWindow && this.window)
-        this.window = remove(this.window);
+    if( removeWindow &&  isHTMLElement( this.window ) )
+        this.window = remove( this.window);
 
     function remove(elem) {
         elem.parentNode.removeChild(elem);
@@ -172,6 +248,15 @@ opera +
     el.className = c.join(' ');
 
   };
+
+  function hasClass(el, cls) {
+
+   for (var c = el.className.split(' '),i=c.length-1; i>=0; i--) {
+      if (c[i] == cls) return true;
+    }
+
+    return false;
+ }
 
  window.ModalJS = modal;
 
