@@ -43,7 +43,7 @@ http://jsfiddle.net/CyBer_UA/8evMH/5/
 ##Parameters
  * <b>window</b> (optional) - link on window {Element}, need set window before call <b>show</b>, otherwise will be error;
  * <b>NotUseAnimate</b> (optional) -  If need switch off animation set true.
- * <b>NotUseAnimate</b> (optional) - class name for close button
+ * <b>closeButtonCls</b> (optional) - class name for close button
 
 ```javascript
 
