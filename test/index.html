@@ -22,10 +22,10 @@
 </div>
 <input type="button" id="m" data-modal-id="modal-window-1" value="окно">
 
-<!--<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>-->
-<!--<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/jasmine-html.js"></script>-->
-<!--<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/boot.js"></script>-->
-<!--<script src="../test/index.js" ></script>-->
+<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
+<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/boot.js"></script>
+<script src="../test/index.js" ></script>
 <script >
 
     (function( ) {
@@ -37,8 +37,8 @@
         var modal = new ModalJS({
             window: win,
             opt_closeButtonCls: "modal-footer",
-            opt_isOverlayClickHide: true
-//        opt_notUseAnimate: true
+            opt_isOverlayClickHide: true,
+        opt_notUseAnimate: true
         })
 
         bt.onclick = function ( ) {

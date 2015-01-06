@@ -62,7 +62,7 @@ var transition = {
  *
  * @param {!Object} params
  * @param {HTMLElement} window - link on modal window HTMLElement
- * @param {bool} NotUseAnimate - использование анимации по умолчанию ("падение" с верху) (по умолчанию true).
+ * @param {bool} NotUseAnimate - if true, modal window not used animation
  */
     function modal( params ) {
 
@@ -70,16 +70,16 @@ var transition = {
 
         this._handlers = {};
 
+        this._transition = transition;
+
+
 
         this.params = params = params || {};
-
-    //     eventEmitter.call( this );
 
         if ( params.window !== undefined ) {
 
             this.setWindow( params.window );
-
-        }
+        };
 
         addOverlay( this );
 
@@ -96,8 +96,6 @@ var transition = {
 
         window.addEventListener( "resize", this._resizeHandler, false );
     };
-
-//  modal.prototype = eventEmitter.prototype;
 
 
     modal.prototype.on = function ( event, handler ) {
@@ -147,6 +145,16 @@ var transition = {
 
     modal.prototype.setStartAnimationPosition = function() {
         this.window.style.top = -this.window.clientHeight + "px";
+    };
+
+    modal.prototype.setEndAnimationPostition = function ( ) {
+
+        var win = this.window,
+            top = ( window.innerHeight - win.offsetHeight ) / 2,
+            left = ( window.innerWidth - win.offsetWidth ) / 2;
+
+        win.style.top = top + "px";
+        win.style.left = left + "px";
     };
 
  /**
@@ -232,12 +240,12 @@ var transition = {
             this.params.opt_notUseAnimate ||
             !transition.getSupported() ) {
 
-            this.emit( "showed", modal );
+            this.emit( "showed" );
         }
 
         else {
             transition.end( this.window, function ( ) {
-                this.emit ( "showed", this );
+                this.emit ( "showed");
             }.bind( this ) );
         }
 
@@ -250,7 +258,7 @@ var transition = {
         if( !this.isOpen ||
             !isHTMLElement ( this.window ) ) return;
 
-        this.emit( "close", modal );
+        this.emit( "close" );
 
         this.overlay.style.display = "";
         this.window.style.display = "none";
@@ -260,7 +268,7 @@ var transition = {
         return true;
     };
 
- /**-
+ /**
   * Destroyed window element
   * @param {Bool} -  if true, will remove modal window HTMLElement
   *
@@ -297,34 +305,15 @@ var transition = {
         this.overlay = undefined;
     };
 
-    modal.prototype.setEndAnimationPostition = function ( ) {
 
-        var win = this.window,
-            top = ( window.innerHeight - win.offsetHeight ) / 2,
-            left = ( window.innerWidth - win.offsetWidth ) / 2;
-
-        win.style.top = top + "px";
-        win.style.left = left + "px";
-    };
 
     function showAnimateWin( modal ) {
 
         modal.setEndAnimationPostition();
 
-
         if( !modal.params.opt_notUseAnimate ){
             addClass( modal.window , cls );
         }
-//        else {
-//           return modal.setEndAnimationPostition();
-//        }
-
-//        setTimeout( function (){
-//
-//            if( modal.window )
-//                modal.setEndAnimationPostition( );
-//        }, 0);
-
     };
 
 

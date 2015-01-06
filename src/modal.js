@@ -11,7 +11,7 @@ opera +
     "use strict";
 
 
-    //#include transition.js
+//#include transition.js
 
  var cls = "modal-window-animate";
 
@@ -28,14 +28,18 @@ opera +
 
         this._handlers = {};
 
+        //#if transition
+        this._transition = transition;
+
+        //#endif
+
 
         this.params = params = params || {};
 
         if ( params.window !== undefined ) {
 
             this.setWindow( params.window );
-
-        }
+        };
 
         addOverlay( this );
 
@@ -196,13 +200,13 @@ opera +
             this.params.opt_notUseAnimate ||
             !transition.getSupported() ) {
 
-            this.emit( "showed", modal );
+            this.emit( "showed" );
         }
 
         //#if transition
         else {
             transition.end( this.window, function ( ) {
-                this.emit ( "showed", this );
+                this.emit ( "showed");
             }.bind( this ) );
         }
         //#endif
@@ -216,7 +220,7 @@ opera +
         if( !this.isOpen ||
             !isHTMLElement ( this.window ) ) return;
 
-        this.emit( "close", modal );
+        this.emit( "close" );
 
         this.overlay.style.display = "";
         this.window.style.display = "none";
