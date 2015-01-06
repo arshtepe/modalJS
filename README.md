@@ -47,5 +47,8 @@ var modal = new ModalJS({
  };
 
  ```
- 
+
+## License
+
+modalJS is licensed under the MIT License (see LICENSE for details). 
  
