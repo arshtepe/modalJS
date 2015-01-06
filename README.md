@@ -1,15 +1,15 @@
--##Features
-- * Cross browser compatibility
-- * Without additional libraries
-- * Easy usage
-- * Css3 animation
-- * Easy settings animation
+##Features
+* Cross browser compatibility
+* Without additional libraries
+* Easy usage
+* Css3 animation
+* Easy settings animation
 
--## Browsers Support
-- * Chrome +
-- * Firefox + 
-- * Opera +
-- * Internet Explorer 9 + 
+## Browsers Support
+* Chrome +
+* Firefox + 
+* Opera +
+* Internet Explorer 9 + 
 
 
 ```javascript
