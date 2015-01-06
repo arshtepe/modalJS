@@ -1,0 +1,24 @@
+{
+  "name": "modalJS",
+  "version": "1.0.0",
+  "main": "build/modal.js",
+  "keywords": [
+    "modal",
+    "window"
+  ],
+  "authors": [
+    "Artem Shtepenko"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine": "~2.1.3"
+  }
+}

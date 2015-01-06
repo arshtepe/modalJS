@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="modalStyle.css" rel="stylesheet" type="text/css" >
+    <link href="../build/modal-default.css" rel="stylesheet" type="text/css" >
+    <script src="../build/modal.js" ></script>
+    <link rel="shortcut icon" type="image/png" href="../bower_components/jasmine/lib/jasmine-core/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="../bower_components/jasmine/lib/jasmine-core/jasmine.css">
+
+
+</head>
+<body>
+
+<div id="modal-window" class="modal-window" >
+    <div id='modal-head' class="modal-head"><h2>Hello</h2></div>
+    <div id='modal-body' class="modal-body">I am modal window №2</div>
+    <div id='modal-footer' class = "modal-footer">
+        <span class='modal-button close-button'>Close me</span>
+    </div>
+</div>
+<input type="button" id="m" data-modal-id="modal-window-1" value="окно">
+
+<!--<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>-->
+<!--<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/jasmine-html.js"></script>-->
+<!--<script type="text/javascript" src="../bower_components/jasmine/lib/jasmine-core/boot.js"></script>-->
+<!--<script src="../test/index.js" ></script>-->
+<script >
+
+    (function( ) {
+
+
+        var bt = document.getElementById( "m"),
+                win = document.getElementById( "modal-window" );
+
+        var modal = new ModalJS({
+            window: win,
+            opt_closeButtonCls: "modal-footer",
+            opt_isOverlayClickHide: true
+//        opt_notUseAnimate: true
+        })
+
+        bt.onclick = function ( ) {
+            modal.show();
+        };
+
+        modal.on( "showed", function ( ) {
+            console.log("showed" );
+        } )
+
+        modal.on( "error", function ( ) {
+            console.log( arguments );
+        } )
+
+
+
+
+
+    } ())
+
+
+
+</script>
+
+</body>
+</html>
