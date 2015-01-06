@@ -30,7 +30,7 @@ var modal = new ModalJS({
  modal.setWindow( /*modal window HTMLEelement*/ );
  modal.destroy( /*opt_removeWindow*/ )// destroyed all handlers and links on HTML elements, if opt_removeWindow = true, removed HTMLElemenet window.
  modal.destroyWindow (/*opt_removeWindow*/);// removed all links on window element, if opt_removeWindow = true, removed HTMLElemenet window.
- //Устанавливает начальную позицию окна при анимирование, по умолчанию с верху по центру за приделами экран
+
  modal.setStartAnimationPosition = function() { // Set start position window  before start animation, default at the top at the center outside screen  
   this.window.style.top = -this.window.clientHeight + "px"; //default value
  };
