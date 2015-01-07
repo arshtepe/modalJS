@@ -1,6 +1,7 @@
 ##Demo
 * http://jsfiddle.net/dyL78o6k/1/ - demo
 * http://jsfiddle.net/dyL78o6k/ - animation change demo
+* http://jsfiddle.net/dyL78o6k/2/ - animation change demo
 
 ##Features
 * Cross browser compatibility
