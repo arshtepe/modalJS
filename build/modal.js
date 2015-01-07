@@ -24,7 +24,6 @@ var transition = {
         var t,
             el = document.createElement('fakeelement'),
             transitions = {
-                'transition':'transitionend',
                 'OTransition':'oTransitionEnd',
                 'MozTransition':'transitionend',
                 'WebkitTransition':'webkitTransitionEnd'
@@ -36,6 +35,10 @@ var transition = {
             }
         }
 
+        if( el.style [ 'transition' ] !== undefined ) {
+        	return this.supportedVal = 'transitionend';
+        }
+
         return false;
     },
 
@@ -44,7 +47,6 @@ var transition = {
         var event = this.getSupported();
 
         if( !event ) {
-//            setTimeout( callback
             callback();
             return false;
         }
