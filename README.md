@@ -1,7 +1,7 @@
 ##Demo
 * http://jsfiddle.net/dyL78o6k/1/ - demo
 * http://jsfiddle.net/dyL78o6k/ - animation change demo
-* http://jsfiddle.net/dyL78o6k/2/ - animation change demo
+* http://jsfiddle.net/dyL78o6k/3/ - animation change demo
 
 ##Features
 * Cross browser compatibility
@@ -54,6 +54,27 @@ var modal = new ModalJS({
 
  ```
  
+ 
+##Animation change example
+
+http://jsfiddle.net/dyL78o6k/
+
+```javascript
+ modal.setStartAnimationPosition = function() {
+   this.window.style.top = 0 + "px";
+ };
+
+modal.setEndAnimationPostition = function ( ) {
+
+  var win = this.window,
+      top = window.innerHeight - win.offsetHeight ,
+      left = ( window.innerWidth - win.offsetWidth ) / 2 ;
+
+  win.style.top = top + "px";
+  win.style.left = left + "px";
+};
+```
+ 
 ##Animation change example
 
 http://jsfiddle.net/dyL78o6k/2/ 
@@ -65,16 +86,9 @@ modal.on( "close", function ( ) {
   win.style.transform = "scale(0)";
 } );
 
-modal.setEndAnimationPostition = function ( ) {
-
-  var win = this.window,
-      top = ( window.innerHeight - win.offsetHeight ) / 2 ,
-      left = ( window.innerWidth - win.offsetWidth ) / 2 ;
-
-  win.style.top = top + "px";
-  win.style.left = left + "px";
-  win.style.transform = "scale(1)";
-};
+modal.on( "show", function ( ) {
+   win.style.transform = "scale(1)";
+} );
 ```
 
 ```CSS
