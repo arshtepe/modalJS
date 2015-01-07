@@ -25,7 +25,8 @@ var modal = new ModalJS({
  });
  
  modal.show(); //show window
- modal.hide(); // hide window 
+ modal.hide(); // hide window
+ // Events: show, showed, close
  modal.on( "showed",function () { // bind on modal events
  // this == modal
  } ) ;
