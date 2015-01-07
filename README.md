@@ -53,6 +53,37 @@ var modal = new ModalJS({
  };
 
  ```
+ 
+##Animation change example
+
+http://jsfiddle.net/dyL78o6k/2/ 
+
+
+```javascript
+
+modal.on( "close", function ( ) {
+  win.style.transform = "scale(0)";
+} );
+
+modal.setEndAnimationPostition = function ( ) {
+
+  var win = this.window,
+      top = ( window.innerHeight - win.offsetHeight ) / 2 ,
+      left = ( window.innerWidth - win.offsetWidth ) / 2 ;
+
+  win.style.top = top + "px";
+  win.style.left = left + "px";
+  win.style.transform = "scale(1)";
+};
+```
+
+```CSS
+ transition: all .7s ease-in; /* changed "top" on "all" */
+-o-transition: all .7s ease-in;
+-moz-transition: all  .7s ease-in;
+-webkit-transition: all  .7s ease-in;      
+
+```
 
 ## License
 
