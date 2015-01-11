@@ -3,6 +3,12 @@
 * http://jsfiddle.net/dyL78o6k/ - animation change demo
 * http://jsfiddle.net/dyL78o6k/3/ - animation change demo
 
+##Installation
+```HTML
+<link href="path_to/modal-default.css" rel="stylesheet" type="text/css">
+<script src="path_to/modal.min.js"></script>
+```
+
 ##Features
 * Cross browser compatibility
 * Without additional libraries
