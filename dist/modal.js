@@ -10,6 +10,7 @@ opera +
 (function() {
     "use strict";
 
+    var cls = "modal-window-animate";
 
 
     var transition = {
@@ -57,17 +58,16 @@ opera +
             } );
         }
     };
- var cls = "modal-window-animate";
-
- /**
- * Basic modal object
- *
- * @param {!Object} params
- * @param {HTMLElement} window - link on modal window HTMLElement
- * @param {Boolean} [useAnimate=true] - if false, modal window not used animation
- * @param {string=} opt_closeButtonCls - Close button element class
- * @param {boolean=} opt_isOverlayClickHide=false] - if true when click on overlay, window will close
- */
+    
+    /**
+    * Basic modal object
+    *
+    * @param {!Object} params
+    * @param {HTMLElement} window - link on modal window HTMLElement
+    * @param {Boolean} [useAnimate=true] - if false, modal window not used animation
+    * @param {string=} opt_closeButtonCls - Close button element class
+    * @param {boolean=} opt_isOverlayClickHide=false] - if true when click on overlay, window will close
+    */
     function Modal( params ) {
 
         var self = this, id;
@@ -100,6 +100,8 @@ opera +
 
         window.addEventListener( "resize", this._resizeHandler, false );
     };
+
+    Modal.prototype.VERSION = [ 1, 0, 5 ];
 
 
     Modal.prototype.on = function ( event, handler ) {
