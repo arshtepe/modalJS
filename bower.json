@@ -1,6 +1,6 @@
 {
   "name": "modal-js",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "main": "build/modal.js",
   "keywords": [
     "modal",

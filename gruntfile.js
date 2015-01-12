@@ -9,7 +9,7 @@ module.exports = function (grunt) {
                 },
 
                 files: {
-                    './build/modal.js': ['src/modal.js']
+                    './dist/modal.js': ['src/modal.js']
                 }
             }
         },
@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         uglify: {
             build:{
                 files: {
-                    'build/modal.min.js': ['build/modal.js']
+                    'dist/modal.min.js': ['dist/modal.js']
                 }
             }
         }

@@ -28,12 +28,12 @@ var modal = new ModalJS({
   window: win,// Link on HTMLElement
   opt_closeButtonCls: "close-button",//Close button element class
   opt_isOverlayClickHide: true,// if true when click on overlay, window will close
-  opt_notUseAnimate: true // if true animation does not use 
+  useAnimate: false// if false animation does not use (default true)
  });
  
  modal.show(); //show window
  modal.hide(); // hide window
- // Events: show, showed, close
+ // Events: show, showed, hide
  modal.on( "showed",function () { // bind on modal events
  // this == modal
  } ) ;
@@ -88,7 +88,7 @@ http://jsfiddle.net/dyL78o6k/2/
 
 ```javascript
 
-modal.on( "close", function ( ) {
+modal.on( "hide", function ( ) {
   win.style.transform = "scale(0)";
 } );
 

@@ -20,9 +20,11 @@ opera +
  *
  * @param {!Object} params
  * @param {HTMLElement} window - link on modal window HTMLElement
- * @param {bool} NotUseAnimate - if true, modal window not used animation
+ * @param {Boolean} [useAnimate=true] - if false, modal window not used animation
+ * @param {string=} opt_closeButtonCls - Close button element class
+ * @param {boolean=} opt_isOverlayClickHide=false] - if true when click on overlay, window will close
  */
-    function modal( params ) {
+    function Modal( params ) {
 
         var self = this, id;
 
@@ -30,11 +32,11 @@ opera +
 
         //#if transition
         this._transition = transition;
-
         //#endif
 
-
         this.params = params = params || {};
+
+        params.useAnimate = true;
 
         if ( params.window !== undefined ) {
 
@@ -58,7 +60,7 @@ opera +
     };
 
 
-    modal.prototype.on = function ( event, handler ) {
+    Modal.prototype.on = function ( event, handler ) {
 
         if( !this._handlers [ event ] )
             this._handlers [ event ] = [];
@@ -67,7 +69,7 @@ opera +
 
     };
 
-    modal.prototype.off = function ( event, handler ) {
+    Modal.prototype.off = function ( event, handler ) {
 
         var handlers =  this._handlers[ event ];
 
@@ -87,7 +89,7 @@ opera +
     };
 
 
-    modal.prototype.emit = function ( event ) {
+    Modal.prototype.emit = function ( event ) {
 
         var self = this,
             handlers =  this._handlers[ event ],
@@ -103,11 +105,19 @@ opera +
         }, 0 );
     };
 
-    modal.prototype.setStartAnimationPosition = function() {
+    /**
+    * Seted window start position, before animation
+    */
+
+    Modal.prototype.setStartAnimationPosition = function() {
         this.window.style.top = -this.window.clientHeight + "px";
     };
 
-    modal.prototype.setEndAnimationPostition = function ( ) {
+    /**
+    * Seted window end position, for animation
+    */
+
+    Modal.prototype.setEndAnimationPostition = function ( ) {
 
         var win = this.window,
             top = ( window.innerHeight - win.offsetHeight ) / 2,
@@ -117,12 +127,12 @@ opera +
         win.style.left = left + "px";
     };
 
- /**
- * @param {HTMLElement} window - window HTMLElement
- *
- */
+	/**
+	* @param {HTMLElement} window - window HTMLElement
+	*
+	*/
 
-    modal.prototype.setWindow = function ( modalWindow ) {
+    Modal.prototype.setWindow = function ( modalWindow ) {
 
         if( !isHTMLElement( modalWindow ))
             throw "Incorrect parameter 'window', expected Element";
@@ -130,7 +140,7 @@ opera +
         this.destroyWindow();
 
         if ( this.params.opt_closeButtonCls !== undefined ) {
-            closeHadnler ( this, modalWindow );
+            hideHadnler ( this, modalWindow );
         }
 
 
@@ -144,50 +154,50 @@ opera +
 
  
 
-    function closeHadnler ( ctx, newWindow ) {
+    function hideHadnler ( ctx, newWindow ) {
 
         if ( ctx.window !== undefined ) {
-            removeCloseHandler ( ctx );
+            removeHideHandler ( ctx );
         }
 
         ctx._windowHandler = function( e ) {
-            onClickClose.call ( newWindow, e, ctx );
+            onClickHide.call ( newWindow, e, ctx );
         };
 
         newWindow.addEventListener ( "click", ctx._windowHandler, false );
     };
 
-    function onClickClose ( e, ctx ) {
+	function onClickHide ( e, ctx ) {
 
-        var parent = e.target,
-            cls = ctx.params.opt_closeButtonCls;
+	    var parent = e.target,
+	        cls = ctx.params.opt_closeButtonCls;
 
-        if ( hasClass ( parent, cls ) )
-            return ctx.hide ();
+	    if ( hasClass ( parent, cls ) )
+	        return ctx.hide ();
 
-        while ( parent  !== this ) {
+	    while ( parent  !== this ) {
 
-          if( hasClass ( parent, cls ) ) {
-            ctx.hide ();
-            return;
-          }
+	      if( hasClass ( parent, cls ) ) {
+	        ctx.hide ();
+	        return;
+	      }
 
-          parent = parent.parentNode;
+	      parent = parent.parentNode;
 
-        }
+	    }
 
-    };
+	};
 
-    function removeCloseHandler ( ctx ) {
+    function removeHideHandler ( ctx ) {
         if( ctx && ctx.window )
             ctx.window.removeEventListener ( "click", ctx._windowHandler );
     };
 
 
-    modal.prototype.show = function( )  {
+    Modal.prototype.show = function( )  {
 
         if( this.isOpen ||
-            !isHTMLElement ( this.window )) return;
+            !isHTMLElement ( this.window ) ) return;
 
         this.emit( "show" );
 
@@ -197,7 +207,7 @@ opera +
         showAnimateWin( this );
 
         if( typeof transition == "undefined" ||
-            this.params.opt_notUseAnimate ||
+            !this.params.useAnimate ||
             !transition.getSupported() ) {
 
             this.emit( "showed" );
@@ -215,12 +225,12 @@ opera +
     };
 
 
-    modal.prototype.hide = function() {
+    Modal.prototype.hide = function() {
 
         if( !this.isOpen ||
             !isHTMLElement ( this.window ) ) return;
 
-        this.emit( "close" );
+        this.emit( "hide" );
 
         this.overlay.style.display = "";
         this.window.style.display = "none";
@@ -236,10 +246,10 @@ opera +
   *
   * */
 
-    modal.prototype.destroyWindow = function( removeWindowElement ) {
+    Modal.prototype.destroyWindow = function( removeWindowElement ) {
 
         this.hide();
-        removeCloseHandler ( this );
+        removeHideHandler ( this );
 
         if( removeWindowElement === true
             &&  isHTMLElement( this.window ) )
@@ -255,13 +265,13 @@ opera +
      * */
 
 
-    modal.prototype.destroy = function( removeWindowElement ) {
+    Modal.prototype.destroy = function( removeWindowElement ) {
 
         window.removeEventListener( "resize", this._resizeHandler);
-        this.overlay.removeEventListener( "click", this._closeHandler);
+        this.overlay.removeEventListener( "click", this._hideHandler);
         this.destroyWindow( removeWindowElement );
-        this.off( "open" );
-        this.off( "close" );
+        this.off( "show" );
+        this.off( "hide" );
 
         remove( this.overlay );
         this.overlay = undefined;
@@ -273,7 +283,7 @@ opera +
 
         modal.setEndAnimationPostition();
 
-        if( !modal.params.opt_notUseAnimate ){
+        if( modal.params.useAnimate ){
             addClass( modal.window , cls );
         }
     };
@@ -284,17 +294,17 @@ opera +
     }
 
     function isHTMLElement(elem) {
-        return (typeof elem=== "object" ) &&
-            (elem.nodeType === 1) && (typeof elem.style === "object") &&
-            (typeof elem.ownerDocument ==="object");
+        return ( typeof elem=== "object" ) &&
+            ( elem.nodeType === 1 ) && ( typeof elem.style === "object" ) &&
+            ( typeof elem.ownerDocument ==="object" );
     }
 
 
-    function addOverlay(modal) {
-        var overlay = document.createElement("div");
+    function addOverlay( modal ) {
+        var overlay = document.createElement( "div" );
 
         overlay.className = "modal-overlay";
-        modal._closeHandler = function() {
+        modal._hideHandler = function() {
 
             if ( modal.params.opt_isOverlayClickHide ) {
                return modal.hide();
@@ -302,8 +312,8 @@ opera +
 
         };
 
-        overlay.addEventListener("click", modal._closeHandler, false);
-        modal.overlay = document.body.appendChild(overlay);
+        overlay.addEventListener( "click", modal._hideHandler, false );
+        modal.overlay = document.body.appendChild( overlay );
     }
 
 
@@ -328,6 +338,6 @@ opera +
 
 
 
- window.ModalJS = modal;
+ window.ModalJS = Modal;
 
 }());

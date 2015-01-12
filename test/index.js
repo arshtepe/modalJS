@@ -60,7 +60,7 @@ describe("ModalWindow Object", function() {
 
         var win = modal.window;
 
-        modal.params.opt_notUseAnimate = true;
+        modal.params.useAnimate = false;
         modal.show();
         setTimeout( function () {
 
@@ -85,7 +85,7 @@ describe("ModalWindow Object", function() {
         modal.destroy( true );
     } );
 
-    it ( "Overlay click close", function () {
+    it ( "Overlay click hide", function () {
 
         modal.show();
         modal.params.opt_isOverlayClickHide = true;
@@ -97,7 +97,7 @@ describe("ModalWindow Object", function() {
 
 
 
-    it ( "CloseButton click close", function () {
+    it ( "CloseButton click hide", function () {
 
         modal.show();
         modal.params.opt_closeButtonCls = "close-button";
