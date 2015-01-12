@@ -1,7 +1,7 @@
 ##Demo
 * http://jsfiddle.net/dyL78o6k/1/ - demo
-* http://jsfiddle.net/dyL78o6k/ - animation change demo
-* http://jsfiddle.net/dyL78o6k/3/ - animation change demo
+* http://jsfiddle.net/dyL78o6k/ -   animation change demo
+* http://jsfiddle.net/dyL78o6k/4/ - animation change demo
 
 ##Installation
 ```HTML
